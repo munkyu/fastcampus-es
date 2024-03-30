@@ -1,0 +1,16 @@
+filebeat.inputs:
+- type: filestream
+  id: my-apache-kafka-1
+  enabled: true
+  paths:
+    - /Users/johnny/fastcampus-es/dataset/apache-web.log
+ 
+output.kafka:
+  hosts: ["localhost:10000","localhost:10001","localhost:10002"]
+  topic: 'apache-web'
+  partition.round_robin:
+    reachable_only: false
+  required_acks: 1
+  compression: gzip
+  max_message_bytes: 1000000
+
