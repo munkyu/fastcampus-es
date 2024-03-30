@@ -1,0 +1,49 @@
+apply plugin: 'java'
+
+compileJava {
+    sourceCompatibility = JavaVersion.VERSION_17
+    targetCompatibility = JavaVersion.VERSION_17
+}
+
+version = '8.12.0'
+jar {
+    manifest {
+        attributes 'Implementation-Title': 'Elasticsearch Jaso Analyzer Plugin',
+                   'Implementation-Version': version
+    }
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation group: 'org.elasticsearch', name: 'elasticsearch', version: version
+    implementation group: 'org.apache.logging.log4j', name: 'log4j-api', version: '2.17.1'
+    implementation group: 'org.apache.logging.log4j', name: 'log4j-core', version: '2.17.1'
+    implementation group: 'org.slf4j', name: 'slf4j-api', version: '1.7.32'
+    testImplementation group: 'junit', name: 'junit', version: '4.+'
+}
+
+test {
+    systemProperties 'property': 'value'
+}
+
+task buildPluginZip(type: Zip, dependsOn:[':jar']) {
+    baseName = 'jaso-analyzer-plugin'
+    classifier = 'plugin'
+    from 'build/libs'
+    from 'src/main/resources'
+
+    copy {
+        from "build/distributions"
+        into "libs"
+    }
+}
+
+artifacts {
+    archives buildPluginZip
+}
+
+[ compileJava, compileTestJava ]*.options*.encoding = 'UTF-8'
+[ compileJava, compileTestJava ]*.options*.compilerArgs = ['-Xlint:-options']
