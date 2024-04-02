@@ -57,32 +57,6 @@ public class JasoDecomposer {
     };
 
     public String decompose(String token) {
-        if (token.length() == 0) {
-            return "";
-        }
-
-        StringBuilder builder = new StringBuilder();
-
-        char[] arrCh = token.toCharArray();
-        for(char ch : arrCh) {
-            int codePoint = ch;
-            if (codePoint >= START_KOREA_UNICODE && codePoint <= END_KOREA_UNICODE) {
-                // 한글인 경우
-                int startValue = codePoint - START_KOREA_UNICODE;
-                int jong = startValue % 28;
-                int jung = ((startValue - jong) / 28) % 21;
-                int cho = (((startValue - jong) / 28) - jung) / 21;
-                builder.append(UNICODE_CHO_SUNG[cho]);
-                builder.append(UNICODE_JUNG_SUNG[jung]);
-                if (UNICODE_JONG_SUNG[jong] != UNICODE_JONG_SUNG_EMPTY) {
-                    builder.append(UNICODE_JONG_SUNG[jong]);
-                }
-            } else {
-                // 그외 (e.g. 영어, 숫자, 특수문자)
-                builder.append(ch);
-            }
-        }
-
-        return builder.toString();
+       return "";
     }
 }
