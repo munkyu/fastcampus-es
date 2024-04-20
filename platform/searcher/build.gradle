@@ -1,0 +1,34 @@
+plugins {
+	id 'java'
+	id 'org.springframework.boot' version '2.5.2'
+	id 'io.spring.dependency-management' version '1.1.4'
+}
+
+group = 'com.fastcampus'
+version = '0.0.1-SNAPSHOT'
+
+java {
+	sourceCompatibility = '17'
+}
+
+repositories {
+	mavenCentral()
+}
+
+dependencies {
+	implementation 'org.springframework.boot:spring-boot-starter'
+	implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+	implementation 'mysql:mysql-connector-java'
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	implementation 'co.elastic.clients:elasticsearch-java:8.3.3'
+	implementation 'org.elasticsearch.client:elasticsearch-rest-client:8.3.3'
+	implementation 'com.fasterxml.jackson.core:jackson-databind:2.12.3'
+	implementation 'org.glassfish:jakarta.json:2.0.1'
+	compileOnly 'org.projectlombok:lombok'
+	annotationProcessor 'org.projectlombok:lombok'
+}
+
+tasks.named('test') {
+	useJUnitPlatform()
+}

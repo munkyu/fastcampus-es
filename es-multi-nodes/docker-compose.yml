@@ -80,6 +80,7 @@ services:
       - ${ES_PORT}:9200
     environment:
       - node.name=es01
+      - node.roles=master,ingest,data_content,data_hot
       - cluster.name=${CLUSTER_NAME}
       - cluster.initial_master_nodes=es01,es02,es03
       - discovery.seed_hosts=es02,es03
@@ -123,6 +124,7 @@ services:
       - esdata02:/usr/share/elasticsearch/data
     environment:
       - node.name=es02
+      - node.roles=master,ingest,data_warm
       - cluster.name=${CLUSTER_NAME}
       - cluster.initial_master_nodes=es01,es02,es03
       - discovery.seed_hosts=es01,es03
@@ -165,6 +167,7 @@ services:
       - esdata03:/usr/share/elasticsearch/data
     environment:
       - node.name=es03
+      - node.roles=master,ingest,data_cold
       - cluster.name=${CLUSTER_NAME}
       - cluster.initial_master_nodes=es01,es02,es03
       - discovery.seed_hosts=es01,es02

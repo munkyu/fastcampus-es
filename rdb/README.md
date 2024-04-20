@@ -1,13 +1,8 @@
-# 파이썬 & 패키지 설치
-```
-brew install python3
-pip3 install -r requirements.txt
-
-```
 # mysql에 데이터 넣기
 ```
 # 테이블 생성
 use db;
+
 CREATE TABLE products (
     id INT NOT NULL AUTO_INCREMENT,
     asin VARCHAR(255) NOT NULL,
@@ -21,12 +16,17 @@ CREATE TABLE products (
     category_id INT,
     is_best_seller BOOLEAN,
     bought_in_last_month INT,
+    is_recommend_seller BOOLEAN,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
     PRIMARY KEY (id),
-    UNIQUE KEY unique_asin (asin)
+    UNIQUE KEY unique_asin (asin),
+    INDEX idx_updated_at (updated_at)
 );
 
-# 데이터 넣기
-python3 data.py
+CREATE TABLE categories (
+    id INT NOT NULL,
+    category_name VARCHAR(255) NOT NULL,
+    PRIMARY KEY (id)
+);
 ```
